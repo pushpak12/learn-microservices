@@ -18,6 +18,7 @@ import com.learn.microservice.user.service.entities.Hotel;
 import com.learn.microservice.user.service.entities.Rating;
 import com.learn.microservice.user.service.entities.User;
 import com.learn.microservice.user.service.exceptions.ResourceNotFoundException;
+import com.learn.microservice.user.service.external.services.HotelService;
 import com.learn.microservice.user.service.repositories.UserRepository;
 
 @Service
@@ -29,6 +30,8 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private RestTemplate restTemplate;
 	
+	@Autowired
+	private HotelService hotelService;
 	
 	private Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
@@ -63,9 +66,10 @@ public class UserServiceImpl implements UserService{
 		List<Rating> ratingList =  ratings.stream().map(rating -> {
 			// api call to Hotel Service to get the hotel
 			// http://localhost:8082/hotels/d7d0d468-422e-4147-9174-915f46ba2c2c
-			ResponseEntity<Hotel> forEntity = restTemplate.getForEntity("http://HOTELSERVICE/hotels/"+rating.getHotelId(), Hotel.class);
-			Hotel hotel = forEntity.getBody();
-			logger.info("response status code",forEntity.getStatusCode());
+//			ResponseEntity<Hotel> forEntity = restTemplate.getForEntity("http://HOTELSERVICE/hotels/"+rating.getHotelId(), Hotel.class);
+			
+			Hotel hotel = hotelService.getHotel(rating.getHotelId());
+//			logger.info("response status code",forEntity.getStatusCode());
 			
 			// set hotel to rating
 			rating.setHotel(hotel);
