@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import com.learn.microservice.user.service.entities.Rating;
 
 @Service
-@FeignClient(name="RATINGSERVICE")
+@FeignClient(name="RATING-SERVICE")
 public interface RatingsService {
 	
 	// get
