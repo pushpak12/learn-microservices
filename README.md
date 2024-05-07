@@ -35,5 +35,5 @@ To get started with the project, follow these steps:
 1. **Clone the Repository**: Clone this repository to your local machine using:
 
    ```bash
-   git clone https://github.com/your-username/user-hotel-rating.git
+   git clone https://github.com/pushpak12/learn-microservices.git
 
